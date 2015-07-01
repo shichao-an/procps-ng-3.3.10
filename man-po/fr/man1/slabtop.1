@@ -1,0 +1,93 @@
+.\" slabtop.1 - manpage for the slabtop(1) utility, part of procps-ng
+.\"
+.\" Copyright (C) 2003 Chris Rivera
+.\" Licensed under the terms of the GNU Library General Public License, v2
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SLABTOP 1 "juin 2011" procps\-ng "Commandes de l'utilisateur"
+.SH NOM
+slabtop \- Afficher en temps réel les informations des caches slab du noyau
+.SH SYNOPSIS
+\fBslabtop\fP [\fIoptions\fP]
+.SH DESCRIPTION
+\fBslabtop\fP affiche en temps réel les informations détaillées des caches slab
+(objets alloués au noyau) du noyau. Une liste des principaux caches, triée
+selon différents critères, est présentée. Un en\-tête présente également des
+statistiques de la couche slab.
+.SH OPTIONS
+Un appel normal de \fBslabtop\fP ne demande aucune option. Le comportement peut
+cependant être affiné en ajoutant une ou plusieurs des options suivantes\ :
+.TP 
+\fB\-d\fP, \fB\-\-delay=\fP\fIN\fP
+Rafraîchir l'affichage toutes les \fIn\fP secondes. Par défaut, \fBslabtop\fP
+rafraîchit l'affichage toutes les trois secondes. Pour sortir du programme,
+entrez \fBq\fP.
+.TP 
+\fB\-s\fP, \fB\-\-sort=\fP\fIS\fP
+Trier selon le critère de tri \fIS\fP.
+.TP 
+\fB\-o\fP, \fB\-\-once\fP
+Afficher la sortie une seule fois et quitter.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+Afficher la version du logiciel et quitter.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+Afficher l'aide\-mémoire et quitter.
+.SH "CRITÈRES DE TRI"
+Les critères de tri suivants sont utilisés pour classer les caches slab un
+par un et déterminer ceux qui seront affichés en tête du classement. Le
+classement par défaut est fait selon le nombre d'objets («\ o\ »).
+.PP
+Les critères de tri peuvent également être modifiés pendant l'exécution de
+slabtop en entrant le caractère associé.
+.TS
+l l l.
+\fBlettre	description	en\-tête\fP
+a	nombre d'objets actifs	ACTIVE
+b	nombre d'objets par slab	OBJ/SLAB
+c	taille du cache	CACHE SIZE
+l	nombre de slabs	SLABS
+v	nombre de slabs actifs	non disponible
+n	nom	NAME
+o	nombre d'objets	OBJS
+p	nombre de pages par slab	non disponible
+s	taille d'objet	OBJ SIZE
+u	l'utilisation du cache	USE
+.TE
+.SH COMMANDES
+\fBslabtop\fP accepte les commandes entrées au clavier par l'utilisateur
+pendant l'exécution. Les commandes suivantes sont gérées. Lorsqu'il s'agit
+de lettres, les minuscules et les majuscules sont acceptées.
+.PP
+Tous les caractères de tri valables sont aussi acceptés, afin de changer la
+méthode de tri. Consultez la section \fBCRITÈRES DE TRI\fP.
+.TP 
+\fB<BARRE_D'ESPACE>\fP
+Rafraîchir l'écran.
+.TP 
+\fBQ\fP
+Quitter le programme.
+.SH FICHIERS
+.TP 
+\fI/proc/slabinfo\fP
+informations sur slab
+.SH "VOIR AUSSI"
+\fBfree\fP(1), \fBps\fP(1), \fBtop\fP(1), \fBvmstat\fP(8)
+.SH NOTES
+Actuellement, \fBslabtop\fP requiert un noyau\ 2.4 ou supérieur (en
+particulier, une version\ 1.1 ou supérieure de \fI/proc/slabinfo\fP). Les
+noyaux\ 2.2 devraient être gérés dans le futur.
+.PP
+The slabtop statistic header is tracking how many bytes of slabs are being
+used and is not a measure of physical memory.  The 'Slab' field in the
+/proc/meminfo file is tracking information about used slab physical memory.
+.SH AUTEURS
+Écrit par Chris Rivera et Robert Love.
+.PP
+\fBslabtop\fP a été inspiré par le script Perl \fBvmtop\fP de Martin Bligh.
+.SH BOGUES
+Signalez les bogues à <\fIprocps@freelists.org\fP>

@@ -1,0 +1,72 @@
+.\" Copyright 1999, George Staikos (staikos@0wned.org)
+.\" This file may be used subject to the terms and conditions of the
+.\" GNU General Public License Version 2, or any later version
+.\" at your option, as published by the Free Software Foundation.
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+.\" GNU General Public License for more details."
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SYSCTL.CONF 5 "січень 2012 року" procps\-ng "Формати файлів"
+.SH НАЗВА
+sysctl.conf — файл попереднього завантаження або налаштувань sysctl.
+.SH ОПИС
+\fBsysctl.conf\fP — простий файл, що містить значення sysctl, які слід
+прочитати і встановити за допомогою \fBsysctl\fP. Синтаксис є простим:
+.RS
+.sp
+.nf
+.ne 7
+# коментар
+; коментар
+
+ключ = значення
+.fi
+.RE
+.PP
+Зауважте, що порожні рядки буде проігноровано так само, як пробіли перед і
+після ключа або значення, хоча самі значення можуть містити пробіли. Рядки,
+що починаються із символу # або ; вважатимуться коментарями і
+ігноруватимуться.
+.SH ПРИКЛАД
+.RS
+.sp
+.nf
+.ne 7
+# Зразок sysctl.conf
+#
+  kernel.domainname = example.com
+; тут є пробіл, який буде записано до sysctl!
+  kernel.modprobe = /sbin/mod probe
+.fi
+.RE
+.PP
+.SH ФАЙЛИ
+.TP 
+/run/sysctl.d/*.conf
+.TQ
+/etc/sysctl.d/*.conf
+.TQ
+/usr/local/lib/sysctl.d/*.conf
+.TQ
+/usr/lib/sysctl.d/*.conf
+.TQ
+/lib/sysctl.d/*.conf
+.TQ
+/etc/sysctl.conf
+Шляхи, де зазвичай зберігаються файли попереднього завантаження
+sysctl. Див. також параметр sysctl \fI\-\-system\fP.
+.SH "ТАКОЖ ПЕРЕГЛЯНЬТЕ"
+\fBsysctl\fP(8)
+.SH АВТОР
+.UR staikos@0wned.org
+George Staikos
+.UE
+.SH "Як надіслати звіт про вади"
+Про вади, будь ласка, повідомляйте на адресу
+.UR procps@freelists.org
+.UE

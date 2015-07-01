@@ -1,0 +1,195 @@
+.\" Manual page for pgrep / pkill.
+.\" Licensed under version 2 of the GNU General Public License.
+.\" Copyright 2000 Kjetil Torgrim Homme
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PGREP 1 "octobre 2012" procps\-ng "Commandes de l'utilisateur"
+.SH NOM
+pgrep, pkill \- Rechercher ou envoyer un signal à des processus en fonction
+de leur nom et d'autres propriétés
+.SH SYNOPSIS
+\fBpgrep\fP [\fBoptions\fP] \fImotif\fP
+.br
+\fBpkill\fP [\fBoptions\fP] \fImotif\fP
+.SH DESCRIPTION
+\fBpgrep\fP parcourt les processus en cours d'exécution et affiche sur la
+sortie standard les identifiants des processus qui correspondent aux
+critères de sélection donnés. Tous les critères doivent correspondre. Par
+exemple\ :
+.IP
+$ pgrep \-u root sshd
+.PP
+n'affichera que les processus appelés \fBsshd\fP ET qui appartiennent à
+\fBroot\fP. En revanche,
+.IP
+$ pgrep \-u root,daemon
+.PP
+affichera les processus appartenant à \fBroot\fP OU à \fBdaemon\fP.
+.PP
+\fBpkill\fP enverra le signal indiqué (\fBSIGTERM\fP par défaut) à chaque
+processus au lieu de les afficher sur la sortie standard.
+.SH OPTIONS
+.TP 
+\fB\-\fP\fIsignal\fP
+.TQ
+\fB\-\-signal\fP \fIsignal\fP
+Indiquer le signal à envoyer à chaque processus sélectionné. Le signal peut
+être indiqué par son numéro ou par son nom symbolique (seulement pour
+\fBpkill\fP).
+.TP 
+\fB\-c\fP, \fB\-\-count\fP
+À la place de la sortie normale, afficher le nombre de processus
+correspondant aux critères. S'il n'y a pas de correspondance, c'est\-à\-dire
+si zéro est renvoyé, la commande renverra une valeur non nulle.
+.TP 
+\fB\-d\fP, \fB\-\-delimiter\fP \fIdélimiteur\fP
+Déterminer la chaîne utilisée pour délimiter les PID en sortie (un saut de
+ligne par défaut) (seulement pour \fBpgrep\fP).
+.TP 
+\fB\-f\fP, \fB\-\-full\fP
+Le \fImotif\fP n'est normalement comparé qu'au nom du processus. Avec \fB\-f\fP, la
+ligne de commande complète est utilisée.
+.TP 
+\fB\-g\fP, \fB\-\-pgroup\fP \fIpgrp\fP,...
+Ne rechercher que des processus dans les groupes de processus donnés. Le
+groupe de processus 0 se traduit par le propre groupe de processus de
+\fBpgrep\fP ou \fBpkill\fP.
+.TP 
+\fB\-G\fP, \fB\-\-group\fP \fIgid\fP,...
+Ne rechercher que des processus dont l'identifiant de groupe réel est
+donné. Les valeurs utilisées peuvent être numériques ou symboliques.
+.TP 
+\fB\-l\fP, \fB\-\-list\-name\fP
+Afficher le nom du processus avec le PID (seulement pour \fBpgrep\fP).
+.TP 
+\fB\-a\fP, \fB\-\-list\-full\fP
+Afficher la ligne de commande complète avec le PID (seulement pour
+\fBpgrep\fP).
+.TP 
+\fB\-n\fP, \fB\-\-newest\fP
+Ne sélectionner que le processus correspondant le plus récent.
+.TP 
+\fB\-o\fP, \fB\-\-oldest\fP
+Ne sélectionner que le processus correspondant le plus ancien.
+.TP 
+\fB\-P\fP, \fB\-\-parent\fP \fIppid\fP,...
+Ne sélectionner que les processus dont le PID parent est donné.
+.TP 
+\fB\-s\fP, \fB\-\-session\fP \fIsid\fP,...
+Ne sélectionner que les processus dont l'identifiant de session est
+donné. La session 0 se traduit par le propre identifiant de session de
+\fBpgrep\fP ou \fBpkill\fP.
+.TP 
+\fB\-t\fP, \fB\-\-terminal\fP \fIterm\fP,...
+Ne sélectionner que les processus dont le terminal de contrôle est donné. Le
+nom du terminal doit être indiqué sans le préfixe «\ /dev/\ ».
+.TP 
+\fB\-u\fP, \fB\-\-euid\fP \fIeuid\fP,...
+Ne sélectionner que les processus dont l'UID effectif est donné. La valeur
+utilisée peut être numérique ou symbolique.
+.TP 
+\fB\-U\fP, \fB\-\-uid\fP \fIuid\fP,...
+Ne sélectionner que les processus dont l'UID réel est donné. La valeur
+utilisée peut être numérique ou symbolique.
+.TP 
+\fB\-v\fP, \fB\-\-inverse\fP
+Inverser la sélection. Cette option est normalement utilisée dans le
+contexte de \fBpgrep\fP. Dans le contexte de \fBpkill\fP, l'option courte est
+désactivée pour éviter qu'elle soit utilisée par accident.
+.TP 
+\fB\-w\fP, \fB\-\-lightweight\fP
+Montrer tous les identifiants de processus légers («\ threads\ ») au lieu des
+PID dans le contexte de \fBpgrep\fP. Dans le contexte de \fBpkill\fP, cette option
+est désactivée.
+.TP 
+\fB\-x\fP, \fB\-\-exact\fP
+Ne sélectionner que les processus dont le nom (ou la ligne de commande si
+\fB\-f\fP est utilisée) correspond \fBexactement\fP au \fImotif\fP.
+.TP 
+\fB\-F\fP, \fB\-\-pidfile\fP \fIfichier\fP
+Lire les \fIPID\fP dans le fichier. Cette option est peut\-être plus utile pour
+\fBpkill\fP que \fBpgrep\fP.
+.TP 
+\fB\-L\fP, \fB\-\-logpidfile\fP
+Échouer si le \fIfichier\fP de PID (consultez \fB\-F\fP) n'est pas verrouillé.
+.TP 
+\fB\-\-ns\fP \fIPID\fP
+Sélectionner les processus qui appartiennent aux mêmes espaces de
+nommage. Doit être exécuté en tant que superutilisateur pour sélectionner
+les processus d’autres utilisateurs. Consultez \fB\-\-nslist\fP pour une manière
+de limiter les espaces de nommage à sélectionner.
+.TP 
+\fB\-\-nslist\fP \fIen\fP[\fB,\fP\fIen\fP]...
+Ne sélectionner que les espaces de nommage fournis. Les espaces de nommage
+disponibles sont\ : ipc, mnt, net, pid, user et uts.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+Afficher la version du logiciel et quitter.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+Afficher l'aide et quitter.
+.PD
+.SH OPÉRANDES
+.TP 
+\fImotif\fP
+Indiquer une expression rationnelle étendue utilisée pour comparer avec les
+noms de processus ou les lignes de commandes.
+.SH EXEMPLES
+Exemple\ 1\ : Trouver le PID du démon \fBnamed\fP\ :
+.IP
+$ pgrep \-u root named
+.PP
+Exemple 2\ : Faire relire son fichier de configuration par \fBsyslog\fP\ :
+.IP
+$ pkill \-HUP syslogd
+.PP
+Exemple 3\ : Donner des informations détaillées sur tous les processus
+\fBxterm\fP\ :
+.IP
+$ ps \-fp $(pgrep \-d, \-x xterm)
+.PP
+Exemple 4\ : Réduire la priorité de tous les processus \fBnetscape\fP\ :
+.IP
+$ renice +4 $(pgrep netscape)
+.SH "CODES DE RETOUR"
+.PD 0
+.TP 
+0
+Un ou plusieurs processus correspondaient aux critères.
+.TP 
+1
+Aucun processus ne correspondait.
+.TP 
+2
+Erreur de syntaxe dans la ligne de commande.
+.TP 
+3
+Erreur fatale, par exemple plus de mémoire disponible.
+.PD
+.SH NOTES
+Le nom du processus utilisé pour la sélection est limité aux 15\ caractères
+présents dans /proc/\fIpid\fP/stat. Utilisez l'option \fB\-f\fP pour sélectionner
+en fonction de la ligne de commande complète, /proc/\fIpid\fP/cmdline.
+.PP
+Le processus \fBpgrep\fP ou \fBpkill\fP qui s'exécute ne se considérera jamais
+comme correspondant aux critères.
+.SH BOGUES
+Les options \fB\-n\fP, \fB\-o\fP et \fB\-v\fP ne peuvent pas être utilisées en même
+temps. Signalez\-le si vous en avez besoin.
+.PP
+Les processus zombies sont affichés.
+
+.SH "VOIR AUSSI"
+\fBps\fP(1), \fBregex\fP(7), \fBsignal\fP(7), \fBkillall\fP(1), \fBskill\fP(1), \fBkill\fP(1),
+\fBkill\fP(2)
+.SH NORMES
+\fBpkill\fP et \fBpgrep\fP ont été introduits dans Sun Solaris 7. Cette
+implémentation est entièrement compatible.
+.SH AUTEUR
+Kjetil Torgrim Homme <\fIkjetilho@ifi.uio.no\fP>
+.SH BOGUES
+Signalez les bogues à <\fIprocps@freelists.org\fP>

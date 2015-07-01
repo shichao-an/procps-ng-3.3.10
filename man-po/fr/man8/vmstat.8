@@ -1,0 +1,204 @@
+.\"  This page Copyright (C) 1994 Henry Ware <al172@yfn.ysu.edu>
+.\"  Distributed under the GPL, Copyleft 1994.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH VMSTAT 8 "septembre 2011" procps\-ng "Administration système"
+.SH NOM
+vmstat \- Afficher des statistiques sur la mémoire virtuelle
+.SH SYNOPSIS
+\fBvmstat\fP [\fIoptions\fP] [\fIdélai\fP [\fItotal\fP]]
+.SH DESCRIPTION
+\fBvmstat\fP affiche des informations sur les processus, la mémoire, la
+pagination, les blocs d'entrées et sorties, les interruptions et l'activité
+du processeur et des disques.
+.PP
+Le premier rapport produit présente les moyennes depuis le dernier
+démarrage. Les rapports ultérieurs présentent un compte rendu tous les
+\fIdélai\fP. Les rapports sur les processus et la mémoire sont immédiats dans
+tous les cas de figure.
+.SH OPTIONS
+.TP 
+\fIdélai\fP
+Le \fIdélai\fP en seconde entre les mises à jour. Si aucun \fIdélai\fP n'est
+précisé, seul un rapport est affiché avec les valeurs moyennes depuis le
+démarrage.
+.TP 
+\fItotal\fP
+Le nombre de mises à jour. Si \fItotal\fP n'est pas indiqué, quand \fIdélai\fP est
+défini, \fItotal\fP vaut l'infini par défaut.
+.TP 
+\fB\-a\fP, \fB\-\-active\fP
+Afficher la mémoire active et inactive pour les noyaux\ 2.5.41 et supérieurs.
+.TP 
+\fB\-f\fP, \fB\-\-forks\fP
+L'option \fB\-f\fP affiche le nombre de processus fils depuis le démarrage du
+système, à savoir les «\ fork\ », «\ vfork\ » et les clones d'appels
+système. Cela correspond au nombre total de tâches créées. Chaque processus
+est représenté par une ou plusieurs tâches dépendant de l'utilisation des
+processus légers («\ threads\ »). Il n'y a pas de rafraîchissement.
+.TP 
+\fB\-m\fP, \fB\-\-slabs\fP
+Afficher le slabinfo.
+.TP 
+\fB\-n\fP, \fB\-\-one\-header\fP
+N'afficher l'en\-tête qu'une fois plutôt que périodiquement.
+.TP 
+\fB\-s\fP, \fB\-\-stats\fP
+Afficher un tableau de compteurs d'événements et des statistiques sur la
+mémoire. Il s'agit d'un affichage unique.
+.TP 
+\fB\-d\fP, \fB\-\-disk\fP
+Afficher des statistiques sur le disque (pour les versions\ 2.5.70 ou
+supérieures).
+.TP 
+\fB\-D\fP, \fB\-\-disk\-sum\fP
+Afficher des statistiques succinctes à propos de l'activité des disques.
+.TP 
+\fB\-p\fP, \fB\-\-partition\fP \fIpériphérique\fP
+Afficher des statistiques sur les partitions (pour les versions\ 2.5.70 ou
+supérieures).
+.TP 
+\fB\-S\fP, \fB\-\-unit\fP \fIlettre\fP
+Modifier les unités en sortie de 1000 (\fBk\fP), 1024 (\fBK\fP), 1000000 (\fBm\fP) ou
+1048576 (\fBM\fP)\ octets. Remarquez que les champs swap (si/so) ou block
+(bi/bo) ne sont pas modifiés.
+.TP 
+\fB\-t\fP, \fB\-\-timestamp\fP
+Ajouter un horodatage à toutes les lignes.
+.TP 
+\fB\-w\fP, \fB\-\-wide\fP
+Mode de sortie large (utile pour les systèmes avec une grande quantité de
+mémoire, où le mode d’affichage par défaut est victime de rupture de colonne
+involontaire). La sortie est plus grande que 80\ caractères par ligne.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+Afficher la version du logiciel et quitter.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+Afficher l'aide et quitter.
+.PD
+.SH "DESCRIPTIONS DES CHAMPS POUR LE MODE VM"
+.SS "procs (processus)"
+.nf
+r\ : Nombre de processus exécutables (en cours ou en attente d'exécution).
+b\ : Nombre de processus en sommeil non interruptible.
+.fi
+.PP
+.SS "memory (mémoire)"
+.nf
+swpd\ : Quantité de mémoire virtuelle utilisée.
+free\ : Quantité de mémoire disponible.
+buff\ : Quantité de mémoire tampon.
+cache\ : Quantité de mémoire cache.
+inact\ : Quantité de mémoire inactive (option \-a).
+active\ : Quantité de mémoire active (option \-a).
+.fi
+.PP
+.SS "swap (espace d'échange)"
+.nf
+si\ : Quantité de mémoire paginée lue depuis le disque en ko/s.
+so\ : Quantité de mémoire paginée transférée sur disque en ko/s.
+.fi
+.PP
+.SS "io (entrées et sorties)"
+.nf
+bi\ : Blocs reçus d'un périphérique en mode bloc (blocs/s).
+bo\ : Blocs envoyés à un périphérique en mode bloc (blocs/s).
+.fi
+.PP
+.SS "system (système)"
+.nf
+in\ : Nombre d'interruptions par seconde, incluant l'horloge.
+cs\ : Nombre de bascules du contexte par seconde.
+.fi
+.PP
+.SS processeur
+Il s'agit de la répartition du temps processeur en pourcentage.
+.nf
+us\ : Temps consommé par les processus hors noyau (temps utilisateur
+     incluant le temps de définition des priorités).
+sy\ : Temps consommé par le noyau (temps système).
+id\ : Temps d'inactivité. Avant Linux\ 2.5.41, le temps d'attente
+     des entrées et sorties était inclus.
+wa\ : Temps d'attente des entrées et sorties. Inclus dans le temps
+     d'inactivité avant Linux\ 2.5.41.
+st\ : Temps volé par une machine virtuelle. Inconnu avant Linux\ 2.6.11.
+.fi
+.PP
+.SH "DESCRIPTIONS DES CHAMPS POUR LE MODE DISQUE"
+.SS "reads (lectures)"
+.nf
+total\ : Nombre total de lectures réussies.
+merged\ : Lectures groupées (en une seule opération d'entrée ou sortie).
+sectors\ : Secteurs lus avec succès.
+ms\ : Temps de lecture en milliseconde.
+.fi
+.PP
+.SS "writes (écritures)"
+.nf
+total\ : Nombre total d'écritures terminées avec succès.
+merged\ : Écritures groupées (en une seule opération d'entrée ou sortie).
+sectors\ : Secteurs écrits avec succès.
+ms\ : Temps d'écriture en milliseconde.
+.fi
+.PP
+.SS "io (entrées et sorties)"
+.nf
+cur\ : Entrées et sorties en cours.
+s\ : Temps en seconde utilisé par les entrées et sorties.
+.fi
+.PP
+.SH "DESCRIPTIONS DES CHAMPS POUR LE MODE DE PARTITION DE DISQUE"
+.nf
+reads\ : Nombre total de lectures de la partition.
+read sectors\ : Nombre total de secteurs lus pour la partition.
+writes\ : Nombre total d'écritures sur la partition.
+requested writes\ : Nombre total de requêtes d'écriture sur la partition.
+.fi
+.PP
+.SH "DESCRIPTIONS DES CHAMPS POUR LE MODE SLAB"
+.nf
+cache\ : Nom du cache.
+num\ : Nombre d'objets actuellement actifs.
+total\ : Nombre total d'objets disponibles.
+size\ : Taille de chaque objet.
+pages\ : Nombre de pages avec au moins un objet actif.
+.fi
+.SH NOTES
+\fBvmstat\fP ne nécessite aucune permission particulière.
+.PP
+Ces comptes\-rendus tentent de fournir une aide à l'identification des
+goulots d'étranglement du système. Sous Linux, l'utilitaire \fBvmstat\fP n'est
+pas comptabilisé lui\-même comme un processus actif.
+.PP
+Sous Linux, tous les blocs comptent actuellement 1024\ octets. Les anciens
+noyaux peuvent utiliser des blocs de 512, 2048 ou 4096\ octets.
+.PP
+Depuis la version\ 3.1.9 de procps, vmstat vous permet de choisir les unités
+(k, K, m, M). La valeur par défaut est K (1024\ octets) dans le mode par
+défaut.
+.PP
+vmstat utilise le slabinfo\ 1.1
+.SH FICHIERS
+.ta 
+.nf
+\fI/proc/meminfo\fP
+\fI/proc/stat\fP
+\fI/proc/*/stat\fP
+.fi
+.SH "VOIR AUSSI"
+\fBfree\fP(1), \fBiostat\fP(1), \fBmpstat\fP(1), \fBps\fP(1), \fBsar\fP(1), \fBtop\fP(1)
+.PP
+.SH BOGUES
+Le programme ne présente pas sous forme de tableau les E/S de bloc par
+périphérique ni le décompte du nombre d'appels système.
+.SH AUTEURS
+Écrit par Henry Ware <\fIal172@yfn.ysu.edu\fP>.
+.br
+Fabian Frédérick <\fIffrederick@users.sourceforge.net\fP> (diskstat,
+slab, partitions…)
+.SH BOGUES
+Signalez les bogues à <\fIprocps@freelists.org\fP>

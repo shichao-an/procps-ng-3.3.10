@@ -1,0 +1,170 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WATCH 1 "juin 2011" procps\-ng "Commandes de l'utilisateur"
+.SH NOM
+watch \- Exécuter un programme périodiquement en affichant le résultat à
+l'écran
+.SH SYNOPSIS
+\fBwatch\fP [\fIoptions\fP] \fIcommande\fP
+.SH DESCRIPTION
+\fBwatch\fP exécute la \fIcommande\fP périodiquement et affiche le résultat et les
+erreurs (en plein écran). Cela permet d'observer les changements de
+résultats du programme au fil du temps. Par défaut, le programme est exécuté
+toutes les deux secondes. Par défaut, \fBwatch\fP fonctionnera jusqu'à être
+interrompu.
+.SH OPTIONS
+.TP 
+\fB\-d\fP, \fB\-\-differences\fP [\fIpermanent\fP]
+Surligner les différences entre les mises à jour successives. L'option lira
+un argument facultatif qui modifie la surbrillance de façon permanente,
+permettant de voir ce qui a été modifié au moins une fois depuis la première
+itération.
+.TP 
+\fB\-n\fP, \fB\-\-interval\fP \fIintervalle\fP
+Indiquer l'\fIintervalle\fP de mise à jour, en seconde. La commande ne permet
+pas d'utiliser un intervalle plus rapide que 0,1 seconde, qui est la valeur
+utilisée à la place des valeurs plus petites.
+.TP 
+\fB\-p\fP, \fB\-\-precise\fP
+Essayer d'exécuter \fIcommande\fP toutes les \fIintervalle\fP secondes. Essayez
+avec \fBntptime\fP et regardez comme les fractions de seconde ne changent
+quasiment pas, contrairement au mode normal où elles augmentent
+continuellement.
+.TP 
+\fB\-t\fP, \fB\-\-no\-title\fP
+Cacher l'en\-tête contenant l'intervalle, la commande et la date actuelle en
+haut de l'affichage, ainsi que la ligne blanche qui suit.
+.TP 
+\fB\-b\fP, \fB\-\-beep\fP
+Émettre un bip lorsque le code de retour de la commande est non nul.
+.TP 
+\fB\-e\fP, \fB\-\-errexit\fP
+Geler les mises à jour en cas d'erreur de la commande et quitter après avoir
+appuyé sur une touche.
+.TP 
+\fB\-g\fP, \fB\-\-chgexit\fP
+Terminer quand la sortie de \fIcommande\fP est modifiée.
+.TP 
+\fB\-c\fP, \fB\-\-color\fP
+Interpréter les suites et style de couleur ANSI.
+.TP 
+\fB\-x\fP, \fB\-\-exec\fP
+\fIcommande\fP est passée en paramètre à \fBsh\ \-c\fP, ce qui signifie que vous
+devrez parfois utiliser des guillemets supplémentaires pour obtenir l'effet
+désiré. Ce comportement peut être modifié avec l'option \fB\-\-exec\fP qui passe
+la commande à \fBexec\fP(2).
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+Afficher l'aide et quitter.
+.TP 
+\fB\-v\fP, \fB\-\-version\fP
+Afficher la version du logiciel et quitter.
+.SH NOTES
+La reconnaissance des options suit la norme POSIX (le traitement des options
+s'arrête dès le premier paramètre qui n'est pas une option). Cela signifie
+que les options se trouvant après la \fIcommande\fP ne seront pas interprétées
+par \fBwatch\fP.
+.SH EXEMPLES
+.PP
+Pour vérifier les courriels\ :
+.IP
+watch \-n 60 from
+.PP
+Pour afficher les changements dans le contenu d'un répertoire\ :
+.IP
+watch \-d ls \-l
+.PP
+Pour n'afficher que les fichiers appartenant à arthur\ :
+.IP
+watch\ \-d 'ls\ \-l\ |\ fgrep arthur'
+.PP
+Pour vérifier l'effet des guillemets\ :
+.IP
+watch echo $$
+.br
+watch echo '$$'
+.br
+watch echo "'"'$$'"'"
+.PP
+Pour vérifier l'effet du temps de maintien de la précision, essayez en
+ajoutant \fB\-p\fP à
+.IP
+watch \-n 10 sleep 1
+.PP
+Pour vérifier que l'administrateur a installé le dernier noyau avec
+.IP
+watch uname \-r
+.PP
+Notez que \fB\-p\fP peut ne pas fonctionner entre deux redémarrages, à cause de
+\fBntpdate\fP ou d'autres programmes modifiant la date au démarrage.
+.SH BOGUES
+Lors du redimensionnement d'un terminal, l'écran ne sera pas rafraîchi
+correctement avant la prochaine exécution. Les mises en évidence dues à
+\fB\-\-differences\fP sont également perdues.
+.PP
+Les caractères non imprimables de la sortie du programme sont
+ignorés. Utilisez «\ cat \-v\ » pour les afficher.
+.PP
+La combinaison de caractères supposés s'afficher en dernière colonne de
+l'écran risque de s'afficher dans la colonne précédente ou pas du tout.
+.PP
+Les combinaisons de caractères ne sont jamais considérées différentes en
+mode \fI\-\-differences\fP. Seul le caractère de base est considéré.
+.PP
+Les lignes blanches qui suivent directement une ligne s'arrêtant en dernière
+colonne ne sont pas affichées
+.PP
+Le mode \fB\-\-precise\fP ne dispose pas encore de fonctions de temporisation
+pour compenser une \fIcommande\fP dont le temps d'exécution est supérieure à
+\fIsecondes\fP secondes. \fBwatch\fP peut également lancer en rafales autant
+d'exécution de \fIcommande\fP que possible pour rattraper une exécution
+précédente qui aurait pris plus de \fIsecondes\fP secondes à s'exécuter (par
+exemple, \fBnetstat\fP prend beaucoup de temps pour effectuer une interrogation
+DNS).
+.SH "CODES DE RETOUR"
+.PP
+.RS
+.PD 0
+.TP 
+\fB0\fP
+Réussite.
+.TP 
+\fB1\fP
+Erreurs diverses.
+.TP 
+\fB2\fP
+Échec lors du dédoublement («\ fork\ ») du processus à observer.
+.TP 
+\fB3\fP
+Échec de remplacement de la sortie standard du processus fils par une
+écriture vers le tube.
+.TP 
+\fB4\fP
+Échec d'exécution de la commande.
+.TP 
+\fB5\fP
+Échec de la fermeture d'écriture vers le tube du processus fils.
+.TP 
+\fB7\fP
+Échec de la création du tube IPC.
+.TP 
+\fB8\fP
+Le processus fils n'a pas pu renvoyer une valeur avec \fBwaitpid\fP(2) ou la
+commande s'est terminée en erreur.
+.TP 
+\fBautre\fP
+L'observation propagera l'état du code de retour en tant que code de retour
+du fils.
+.SH AUTEURS
+Le programme \fBwatch\fP a été écrit par Tony Rems
+<\fIrembo@unisoft.com\fP> en 1991 avec des corrections et des
+modifications de François Pinard. Mike Coleman <\fImkc@acm.org\fP> l'a
+retravaillé et a ajouté de nouvelles fonctionnalités en 1999. Les
+fonctionnalités beep, exec et la gestion d'erreurs ont été ajoutés par Morty
+Abzug <\fImorty@frakir.org\fP> en 2008. Un matin de mars de 2003,
+Anthony DeRobertis <\fIasd@suespammers.org\fP> a ajouté la gestion de
+la précision à la milliseconde. La prise en charge d'Unicode a été ajoutée
+en 2009 par Jarrod Lowe <\fIprocps@rrod.net\fP>.

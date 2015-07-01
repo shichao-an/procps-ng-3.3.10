@@ -1,0 +1,62 @@
+.\" -*- coding: UTF-8 -*-
+.\" Copyright (C) 1998 Miquel van Smoorenburg.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; if not, write to the Free Software
+.\" Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PIDOF 1 "24 липня 2013 року" "" "Команди користувача"
+.SH НАЗВА
+pidof — визначити ідентифікатор процесу запущеної програми.
+.SH "КОРОТКИЙ ОПИС"
+\fBpidof\fP [\fB\-s\fP] [\fB\-c\fP] [\fB\-x\fP] [\fB\-o\fP \fIпропущений pid[,пропущений
+pid..]\fP] [\fB\-o\fP \fIпропущений pid[,пропущений pid..]..\fP] \fBпрограма\fP
+[\fBпрограма..\fP]
+.SH ОПИС
+\fBPidof\fP виконує пошук ідентифікаторів процесів (pids) вказаних
+програм. Дані щодо виявлених ідентифікаторів буде виведено до стандартного
+виведення.
+.SH ПАРАМЕТРИ
+.IP \-s
+Один відповідник: наказує програмі повернути лише один \fIpid\fP.
+.IP \-c
+Повернути лише ідентифікатори тих процесів, які працюють у тому самому
+кореневому каталозі. Цей параметр буде проігноровано, якщо програму запущено
+від імені користувачів, відмінних від користувача root, оскільки таким
+користувачам не дозволено доступ до перевірки поточного кореневого каталогу
+процесів, власниками яких вони не є.
+.IP \-x
+Разом зі скриптами: наказує програмі повернути ідентифікатори процесів
+оболонок, у яких запущено вказані скрипти.
+.IP "\-o \fIomitpid\fP"
+Наказує \fIpidof\fP пропускати процеси із вказаним ідентифікатором. Спеціальним
+ідентифікатором процесу \fB%PPID\fP можна скористатися для визначення
+батьківського процесу програми \fIpidof\fP, інакше кажучи, оболонки або скрипту
+оболонки, за допомогою якого було викликано програму.
+.SH "СТАН ВИХОДУ"
+.TP 
+\fB0\fP
+Знайдено принаймні одну програму із вказаною назвою.
+.TP 
+\fB1\fP
+Програми із вказаною назвою не знайдено.
+
+.SH "ТАКОЖ ПЕРЕГЛЯНЬТЕ"
+\fBpgrep\fP(1), \fBpkill\fP(1)
+.SH АВТОР
+Jaromir Capik <jcapik@redhat.com>

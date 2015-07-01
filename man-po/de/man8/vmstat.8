@@ -1,0 +1,208 @@
+.\"  This page Copyright (C) 1994 Henry Ware <al172@yfn.ysu.edu>
+.\"  Distributed under the GPL, Copyleft 1994.
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH VMSTAT 8 "September 2011" procps\-ng System\-Administration
+.SH BEZEICHNUNG
+vmstat \- Statistiken zum virtuellen Speicher ermitteln
+.SH ÜBERSICHT
+\fBvmstat\fP [Optionen] [\fIVerzögerung\fP [\fIAnzahl\fP]]
+.SH BESCHREIBUNG
+\fBvmstat\fP zeigt Informationen zu Prozessen, Speicher, Paging, Block\-E/A,
+Traps, Laufwerken und CPU\-Aktivität an.
+.PP
+Die erste erzeugte Meldung zeigt Durchschnittswerte seit dem letzten
+Neustart des Systems an. Weitere erzeugte Meldungen beziehen diese
+Informationen auf einen Zeitintervall, der in \fIVerzögerung\fP definiert
+ist. Die Meldungen zu Prozessen und Speicher werden unverzüglich ausgegeben.
+.SH OPTIONEN
+.TP 
+\fIVerzögerung\fP
+gibt die \fIVerzögerung\fP in Sekunden an. Falls keine \fIVerzögerung\fP angegeben
+ist, wird nur ein Bericht ausgegeben, der die Durchschnittswerte seit dem
+Systemstart enthält.
+.TP 
+\fIAnzahl\fP
+gibt die Anzahl der Aktualisierungen an. Wenn die \fIAnzahl\fP nicht angegeben,
+aber eine \fIVerzögerung\fP definiert ist, dann ist die Anzahl der
+Aktualisierungen unendlich.
+.TP 
+\fB\-a\fP, \fB\-\-active\fP
+zeigt aktiven und inaktiven Speicher an. Dafür ist ein Kernel 2.5.41 oder
+neuer erforderlich.
+.TP 
+\fB\-f\fP, \fB\-\-forks\fP
+Der Schalter \fB\-f\fP zeigt die Anzahl der Forks seit dem Systemstart an. Dies
+bezieht die Systemaufrufe »fork«, »vfork« und »clone« und entspricht der
+Gesamtzahl der erzeugten Tasks. Jeder Prozess wird durch ein oder mehrere
+Tasks repräsentiert, abhängig von der Thread\-Nutzung. Diese Anzeige wird
+nicht wiederholt.
+.TP 
+\fB\-m\fP, \fB\-\-slabs\fP
+zeigt Slab\-Info an.
+.TP 
+\fB\-n\fP, \fB\-\-one\-header\fP
+zeigt den Header nur einmalig anstatt periodisch an.
+.TP 
+\fB\-s\fP, \fB\-\-stats\fP
+zeigt eine Tabelle der verschiedenen Ereigniszähler und Speicherstatistiken
+an. Diese Anzeige wird nicht wiederholt.
+.TP 
+\fB\-d\fP, \fB\-\-disk\fP
+zeigt Plattenstatistiken an (Kernel 2.5.70 oder neuer erforderlich).
+.TP 
+\fB\-D\fP, \fB\-\-disk\-sum\fP
+zeigt eine statistische Zusammenfassung der Plattenaktivitäten an.
+.TP 
+\fB\-p\fP, \fB\-\-partition\fP \fIGerät\fP
+zeigt detaillierte Statistiken zu Partitionen an (Kernel 2.5.70 oder neuer
+erforderlich).
+.TP 
+\fB\-S\fP, \fB\-\-unit\fP \fIZeichen\fP
+wechselt die Einheit der Ausgabe zwischen 1000 (\fIk\fP), 1024 (\fIK\fP), 1000000
+(\fIm\fP) oder 1048576 (\fIM\fP) Bytes. Beachten Sie, dass diese Änderung der
+Swap\-Felder (si/so) oder Block\-Felder (bi/bo) nicht beeinflusst.
+.TP 
+\fB\-t\fP, \fB\-\-timestamp\fP
+hängt an jede Zeile einen Zeitstempel an.
+.TP 
+\fB\-w\fP, \fB\-\-wide\fP
+Breiter Ausgabemodus. Dieser ist sinnvoll, wenn der vorgegebene Ausgabemodus
+unerwünschte Umbrüche in den Spalten enthält, benötigt aber mehr
+Speicher. Die Ausgabe ist breiter als 80 Zeichen pro Zeile.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an und beendet das Programm.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+zeigt eine Hilfe an und beendet das Programm.
+.PD
+.SH "FELDBESCHREIBUNG FÜR VM\-MODUS"
+.SS Prozesse
+.nf
+r: The number of runnable processes (running or waiting for run time).
+b: The number of processes in uninterruptible sleep.
+.fi
+.PP
+.SS Speicher
+.nf
+swpd: the amount of virtual memory used.
+free: the amount of idle memory.
+buff: the amount of memory used as buffers.
+cache: the amount of memory used as cache.
+inact: the amount of inactive memory.  (\-a option)
+active: the amount of active memory.  (\-a option)
+.fi
+.PP
+.SS Swap
+.nf
+si: Speichermenge aus dem Auslagerungsspeicher geholt (/s).
+so: Speichermenge in den Auslagerungsspeicher geschrieben (/s).
+.fi
+.PP
+.SS IO
+.nf
+bi: von einem Blockgerät empfangene Blöcke (Blöcke/s).
+bo: an ein Blockgerät gesendete Blöcke (Blöcke/s).
+.fi
+.PP
+.SS System
+.nf
+in: Anzahl der Interrupts pro Sekunde, einschließlich der Uhr.
+cs: Anzahl der Kontext\-Switches pro Sekunde.
+.fi
+.PP
+.SS CPU
+Dies sind Prozentsätze der gesamten CPU\-Zeit.
+.nf
+us: Time spent running non\-kernel code.  (user time, including nice time)
+sy: Time spent running kernel code.  (system time)
+id: Time spent idle.  Prior to Linux 2.5.41, this includes IO\-wait time.
+wa: Time spent waiting for IO.  Prior to Linux 2.5.41, included in idle.
+st: Time stolen from a virtual machine.  Prior to Linux 2.6.11, unknown.
+.fi
+.PP
+.SH "FELDBESCHREIBUNG FÜR DISK\-MODUS"
+.SS Lesevorgänge
+.nf
+total: Gesamtzahl erfolgreich abgeschlossener Lesevorgänge
+merged: gruppierte Lesevorgänge (resultierend in einem E/A\-Vorgang)
+sectors: Erfolgreich gelesene Sektoren
+ms: Zeit für Lesevorgänge in Millisekunden
+.fi
+.PP
+.SS Schreibvorgänge
+.nf
+total: Total writes completed successfully
+merged: grouped writes (resulting in one I/O)
+sectors: Sectors written successfully
+ms: milliseconds spent writing
+.fi
+.PP
+.SS IO
+.nf
+cur: E/A in Verarbeitung
+s: für E/A verbrauchte Sekunden
+.fi
+.PP
+.SH "FELDBESCHREIBUNG FÜR PARTITIONSMODUS"
+.nf
+reads: Gesamtzahl der Lesevorgänge auf dieser Partition
+read sectors: Insgesamt gelesene Sektoren auf dieser Partition
+writes : Gesamtzahl der Schreibvorgänge auf dieser Partition
+requested writes: Gesamtzahl der für diese Partition
+                  angeforderten Schreibvorgänge
+.fi
+.PP
+.SH "FELDBESCHREIBUNG FÜR SLAB\-MODUS"
+.nf
+cache: Cache\-Name
+num: Anzahl der gegenwärtig aktiven Objekte
+total: Gesamtzahl der verfügbaren Objekte
+size: Größe jedes Objekts
+pages: Anzahl der Seiten mit mindestens einem aktiven Objekt
+.fi
+.SH ANMERKUNGEN
+\fBvmstat \fP erfordert keine besonderen Zugriffsrechte.
+.PP
+Diese Meldungen haben den Zweck, Engstellen (»Flaschenhälse«) im System zu
+erkennen. Die Linux\-Version von \fBvmstat\fP rechnet sich dabei selbst nicht zu
+den laufenden Prozessen.
+.PP
+Alle Linux\-Blöcke sind gegenwärtig 1024 Byte groß. Ältere Kernel könnten
+Blockgrößen als 512 Byte, 2048 Byte oder 4096 Byte erkennen.
+.PP
+Seit procps 3.1.9, können Sie in vmstat Einheiten wählen (k, K, m, M). Die
+Voreinstellung ist K (1024 Bytes) im Standardmodus.
+.PP
+vmstat verwendet slabinfo 1.1
+.SH DATEIEN
+.ta 
+.nf
+/proc/meminfo
+/proc/stat
+/proc/*/stat
+.fi
+.SH "SIEHE AUCH"
+\fBfree\fP(1), \fBiostat\fP(1), \fBmpstat\fP(1), \fBps\fP(1), \fBsar\fP(1), \fBtop\fP(1)
+.PP
+.SH FEHLER
+Does not tabulate the block io per device or count the number of system
+calls.
+.SH AUTOREN
+Geschrieben von
+.UR al172@yfn.\:ysu.\:edu
+Henry Ware
+.UE .
+.br
+.UR ffrederick@users.\:sourceforge.\:net
+Fabian Fr\('ed\('erick
+.UE
+(diskstat, slab, Partitionen …)
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

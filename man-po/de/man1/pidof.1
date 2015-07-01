@@ -1,0 +1,59 @@
+.\" -*- coding: UTF-8 -*-
+.\" Copyright (C) 1998 Miquel van Smoorenburg.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; if not, write to the Free Software
+.\" Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PIDOF 1 "24. Juli 2013" "" "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+pidof \- die Prozess\-ID eines laufenden Programms ermitteln
+.SH ÜBERSICHT
+\fBpidof\fP [\fB\-s\fP] [\fB\-c\fP] [\fB\-x\fP] [\fB\-o\fP \fIomitpid[,omitpid..]\fP] [\fB\-o\fP
+\fIomitpid[,omitpid..]..\fP] \fBprogram\fP [\fBProgramm..\fP]
+.SH BESCHREIBUNG
+\fBPidof\fP findet die Prozesskennungen (PIDs) der benannten Programme. Es gibt
+diese IDs in der Standardausgabe aus.
+.SH OPTIONEN
+.IP \-s
+weist das Programm an, nur eine \fIPID\fP auszugeben.
+.IP \-c
+gibt nur IDs von Prozessen zurück, die im gleichen Wurzelverzeichnis
+laufen. Diese Option wird für gewöhnliche Benutzer (ohne
+Administratorrechte) ignoriert, da diese das aktuelle Wurzelverzeichnis
+nicht nach Prozessen durchsuchen können, deren Eigentümer sie nicht sind.
+.IP \-x
+berücksichtigt auch Skripte. Das Programm gibt auch Prozess\-IDs der Shells
+zurück, die die benannten Skripte ausführen.
+.IP "\-o \fIomitpid\fP"
+weist \fIpidof\fP an, Prozesse mit den angegebenen PIDs auszulassen. Die
+spezielle PID \fB%PPID\fP kann verwendet werden, um den Elternprozess des
+\fIpidof\fP\-Programms zu bezeichnen, also die aufrufende Shell oder das
+Shell\-Skript.
+.SH EXIT\-STATUS
+.TP 
+\fB0\fP
+Es wurde mindestens ein Programm mit dem angegebenen Namen gefunden.
+.TP 
+\fB1\fP
+Es wurde kein Programm mit dem angegebenen Namen gefunden.
+
+.SH "SIEHE AUCH"
+\fBpgrep\fP(1), \fBpkill\fP(1)
+.SH AUTOR
+Jaromir Capik <jcapik@redhat.com>

@@ -1,0 +1,54 @@
+.\"             -*-Nroff-*-
+.\"  This page Copyright (C) 1993 Matt Welsh, mdw@tc.cornell.edu.
+.\"  Freely distributable under the terms of the GPL
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH TLOAD 1 "Juni 2011" procps\-ng "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+tload \- grafische Darstellung der durchschnittlichen Systemlast
+.SH ÜBERSICHT
+\fBtload\fP [\fIOptionen\fP] [\fITTY\fP]
+.SH BESCHREIBUNG
+\fBtload\fP gibt einen Graph der aktuellen durchschnittlichen Systemlast an das
+angegebene \fITerminal\fP aus (oder an das Terminal des tload\-Prozesses, falls
+keines angegeben wurde).
+.SH OPTIONEN
+.TP 
+\fB\-s\fP, \fB\-\-scale\fP \fIZahl\fP
+ermöglicht die Angabe eines vertikalen Maßstabes für die Anzeige (in Zeichen
+zwischen den Diagrammeinheiten). Ein kleinerer Wert bezeichnet einen
+größeren Maßstab und umgekehrt.
+.TP 
+\fB\-d\fP, \fB\-\-delay\fP \fISekunden\fP
+legt die Zeitspanne in \fISekunden\fP zwischen den Aktualisierungen des Graphen
+fest.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+zeigt diesen Hilfetext an.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an und beendet das Programm.
+.PP
+.SH DATEIEN
+\fI/proc/loadavg\fP zeigt Informationen zur Durchschnittslast an
+.SH "SIEHE AUCH"
+\fBps\fP(1), \fBtop\fP(1), \fBuptime\fP(1), \fBw\fP(1)
+.SH FEHLER
+Die Option \fB\-d\fP\fI Verzögerung\fP setzt das Zeitargument für
+\fBalarm\fP(2). Falls \-d 0 angegeben ist, wird der Alarm auf 0 gesetzt, wodurch
+niemals das Signal \fBSIGALRM\fP gesendet und die Anzeige aktualisiert wird.
+.SH AUTOREN
+Branko Lankester,
+.UR david@\:ods.\:com
+David Engel
+.UE , and
+.UR johnsonm@\:redhat.\:com
+Michael K. Johnson
+.UE .
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

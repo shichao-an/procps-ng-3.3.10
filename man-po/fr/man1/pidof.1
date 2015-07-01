@@ -1,0 +1,58 @@
+.\" -*- coding: UTF-8 -*-
+.\" Copyright (C) 1998 Miquel van Smoorenburg.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License as published by
+.\" the Free Software Foundation; either version 2 of the License, or
+.\" (at your option) any later version.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; if not, write to the Free Software
+.\" Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PIDOF 1 "24 juillet 2013" "" "Commandes de l'utilisateur"
+.SH NOM
+pidof \- Afficher le PID d'un programme
+.SH SYNOPSIS
+\fBpidof\fP [\fB\-s\fP] [\fB\-c\fP] [\fB\-x\fP] [\fB\-o\fP \fIsans_pid\fP[\fB,\fP\fIsans_pid\fP ...]]
+[\fB\-o\fP \fIsans_pid\fP[\fB,\fP\fIsans_pid\fP ...]] \fBprogramme\fP [\fBprogramme\fP ...]
+.SH DESCRIPTION
+\fBpidof\fP cherche les identifiants de processus (PID) portant l'un des noms
+de programme indiqués. Il affiche ces numéros sur la sortie standard.
+.SH OPTIONS
+.IP \fB\-s\fP
+Un seul coup – \fIpidof\fP ne renverra qu'un seul \fIpid\fP.
+.IP \fB\-c\fP
+Ne renvoyer que les identifiants des processus qui sont exécutés dans le
+même répertoire racine. Cette option est ignorée pour les utilisateurs
+autres que le superutilisateur puisqu'ils ne peuvent pas vérifier le
+répertoire racine en cours des processus dont ils ne sont pas propriétaires.
+.IP \fB\-x\fP
+Scripts également — \fIpidof\fP renverra également les PID des interpréteurs de
+commandes exécutant les scripts indiqués.
+.IP "\fB\-o\fP \fIsans_pid\fP"
+Demander à \fIpidof\fP de ne pas tenir compte du PID indiqué. Le PID spécial
+\fB%PPID\fP peut décrire le processus parent du programme \fIpidof\fP,
+c'est\-à\-dire l’interpréteur de commandes ou le script appelant.
+.SH "CODES DE RETOUR"
+.TP 
+\fB0\fP
+Au moins un programme a été trouvé avec le nom demandé.
+.TP 
+\fB1\fP
+Aucun programme trouvé avec le nom demandé.
+
+.SH "VOIR AUSSI"
+\fBpgrep\fP(1), \fBpkill\fP(1)
+.SH AUTEUR
+Jaromir Capik <\fIjcapik@redhat.com\fP>

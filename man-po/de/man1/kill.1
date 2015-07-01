@@ -1,0 +1,83 @@
+.\" t
+.\" (The preceding line is a note to broken versions of man to tell
+.\" them to pre-process this man page with tbl)
+.\" Man page for kill.
+.\" Licensed under version 2 of the GNU General Public License.
+.\" Written by Albert Cahalan; converted to a man page by
+.\" Michael K. Johnson
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH KILL 1 "Oktober 2011" procps\-ng "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+kill \- ein Signal an einen Prozess senden
+.SH ÜBERSICHT
+\fBkill\fP [Optionen] <PID> [...]
+.SH BESCHREIBUNG
+Das Standardsignal für kill ist TERM. Verwenden Sie \fB\-l\fP oder \fB\-L\fP, um
+verfügbare Signale aufzulisten. Im Einzelnen sind diese Signale HUP, INT,
+KILL, STOP, CONT und 0. Andere Signale können auf drei verschiedene Arten
+angegeben werden: \fB\-9\fP, \fB\-SIGKILL\fP oder \fB\-KILL\fP. Negative Werte für
+Prozess\-IDs können zum Auswählen ganzer Prozessgruppen verwendet werden,
+siehe die PGID\-Spalte in der Ausgabe des ps\-Befehls. Eine Prozess\-ID von
+\fB\-1\fP ist speziell, sie bezieht sich auf alle Prozesse außer den
+kill\-Prozess selbst und init.
+.SH OPTIONEN
+.TP 
+\fB<PID> […]\fP
+sendet ein Signal an jede der aufgelisteten <PIDs>
+.TP 
+\fB\-<Signal>\fP
+.TQ
+\fB\-s <Signal>\fP
+.TQ
+\fB\-\-signal <Signal>\fP
+gibt das zu sendende \fBSignal\fP an. Das Signal kann als Name oder Nummer
+angegeben werden. Das Verhalten der Signale ist in der Handbuchseite zu
+\fBsignal\fP(7) beschrieben.
+.TP 
+\fB\-l\fP, \fB\-\-list\fP [\fISignal\fP]
+listet Signalnamen auf. Diese Option hat ein optionales Argument, das die
+Signalnummer in den Signalnamen umwandelt oder umgekehrt.
+.TP 
+\fB\-L\fP,\fB\ \-\-table\fP
+listet alle Signalnamen in einer Tabelle auf.
+.TP 
+.PD
+.SH ANMERKUNGEN
+In Ihrer Shell (dem Befehlszeileninterpreter) könnte bereits ein kill\-Befehl
+eingebaut sein. Es könnte möglich sein, dass Sie den hier beschriebenen
+Befehl als /bin/kill ausführen müssen, um den Konflikt zu lösen.
+.SH BEISPIELE
+.TP 
+\fBkill \-9 \-1\fP
+würgt alle Prozesse ab, die abgewürgt werden können.
+.TP 
+\fBkill \-l 11\fP
+wandelt die Nummer 11 in einen Signalnamen um.
+.TP 
+\fBkill \-L\fP
+listet alle Signalauswahlen in einer Tabelle auf.
+.TP 
+\fBkill 123 543 2341 3453\fP
+sendet das vorgegebene Signal SIGTERM an alle diese Prozesse
+.SH "SIEHE AUCH"
+\fBkill\fP(2), \fBkillall\fP(1), \fBnice\fP(1), \fBpkill\fP(1), \fBrenice\fP(1),
+\fBsignal\fP(7), \fBskill\fP(1)
+.SH STANDARDS
+Dieser Befehl entspricht den üblichen Standards. Der Schalter \fB\-L\fP ist
+Linux\-spezifisch.
+.SH AUTOR
+.UR albert@users.sf.net
+Albert Cahalan
+.UE
+schrieben den kill\-Befehl
+im Jahre 1999, um eine bsdutils\-Version zu ersetzen, die nicht
+standardkompatibel war. Die Version von util\-linux könnte auch korrekt
+funktionieren.
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

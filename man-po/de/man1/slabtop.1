@@ -1,0 +1,97 @@
+.\" slabtop.1 - manpage for the slabtop(1) utility, part of procps-ng
+.\"
+.\" Copyright (C) 2003 Chris Rivera
+.\" Licensed under the terms of the GNU Library General Public License, v2
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SLABTOP 1 "Juni 2011" procps\-ng "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+slabtop \- zeigt Informationen zum Slab\-Cache des Kernels in Echtzeit an
+.SH ÜBERSICHT
+\fBslabtop\fP [\fIOptionen\fP]
+.SH BESCHREIBUNG
+\fBslabtop\fP zeigt detaillierte Informationen zum Slab\-Cache des Kernels in
+Echtzeit an. Es zeigt eine Liste der Top\-Caches, nach einem oder mehreren
+Kriterien sortiert. Außerdem werden Statistik\-Kopfzeilen mit
+Slab\-Layer\-Informationen angezeigt.
+.SH OPTIONEN
+Der normale Aufruf von \fBslabtop\fP erfordert keine weiteren Optionen. Sie
+können das Verhalten dennoch beeinflussen, indem Sie einen oder mehrere der
+folgenden Schalter angeben:
+.TP 
+\fB\-d\fP, \fB\-\-delay\fP=\fIN\fP
+aktualisiert die Anzeige alle \fIn\fP Sekunden. Per Vorgabe aktualisiert
+\fBslabtop\fP die Anzeige alle drei Sekunden. Um das Programm zu beenden,
+drücken Sie \fBq.\fP
+.TP 
+\fB\-s\fP, \fB\-\-sort\fP=\fIS\fP
+sortiert nach \fIS\fP, wobei \fIS\fP eines der Suchkritieren ist.
+.TP 
+\fB\-o\fP, \fB\-\-once\fP
+zeigt die Ausgabe einmal an und beendet das Programm.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an und beendet das Programm.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+zeigt Informationen zur Benutzung an und beendet das Programm.
+.SH SORTIERKRITERIEN
+Folgende Kriterien sind für die Sortierung der einzelnen Slab\-Caches
+zulässig und bestimmen, welche die »Top«\-Caches für die Anzeige sind. Die
+Voreinstellung ist die Sortierung nach der Anzahl der Objekte (»o«).
+.PP
+Die Sortierkriterien können auch angepasst werden, während das Programm
+läuft, indem Sie die Taste mit dem entsprechenden Zeichen drücken.
+.TS
+l l l.
+\fBZeichen	Beschreibung	Header\fP
+a	Anzahl der aktiven Objekte	AKTIV
+b	Objekte pro Slab	OBJ/SLAB
+c	Cache\-Größe	CACHE\-GRÖSSE
+l	Anzahl der Slabs	SLABS
+v	Anzahl der aktiven Slabs	N/A
+n	Name	NAME
+o	Anzahl der Objekte	OBJ
+p	Pages pro Slab	N/A
+s	Objektgröße	OBJ SIZE
+u	Cache\-Nutzung	NUTZ
+.TE
+.SH BEFEHLE
+\fBslabtop\fP akzeptiert Tastaturbefehle des Benutzers, während das Programm
+läuft. Die folgenden Befehle werden unterstützt, wobei für Buchstaben die
+Groß\- oder Kleinschreibung nicht berücksichtigt wird.
+.PP
+Jedes der zulässigen Sortierzeichen wird zum Anpassen der Sortierroutine
+ebenfalls unterstützt. Siehe Abschnitt \fBSORTIERKRITERIEN\fP.
+.TP 
+\fB<LEERTASTE>\fP
+aktualisiert den Bildschirm.
+.TP 
+\fBQ\fP
+beendet das Programm.
+.SH DATEIEN
+.TP 
+\fI/proc/slabinfo\fP
+Slab\-Information
+.SH "SIEHE AUCH"
+\fBfree\fP(1), \fBps\fP(1), \fBtop\fP(1), \fBvmstat\fP(8)
+.SH ANMERKUNGEN
+Gegenwärtig benötigt \fBslabtop\fP einen Kernel der Version 2.4 oder neuer
+(speziell \fI/proc/slabinfo\fP in Version 1.1 oder neuer). Der Kernel 2.2 wird
+wahrscheinlich in zukünftigen Versionen unterstützt.
+.PP
+Die Statistik\-Kopfzeile von slabtop verfolgt die Byte\-Anzahl der genutzten
+Slabs, bezieht sich aber nicht auf den tatsächlichen physischen
+Speicher. Das »Slab«\-Feld in der Datei /proc/meminfo enthält Informationen
+über den physischen Slab\-Speicher.
+.SH AUTOREN
+Geschrieben von Chris Rivera und Robert Love.
+.PP
+\fBslabtop\fP wurde vom Perl\-Skript \fBvmtop\fP von Martin Bligh inspiriert.
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

@@ -1,0 +1,153 @@
+.\" Copyright 1999, George Staikos (staikos@0wned.org)
+.\" This file may be used subject to the terms and conditions of the
+.\" GNU General Public License Version 2, or any later version
+.\" at your option, as published by the Free Software Foundation.
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+.\" GNU General Public License for more details."
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SYSCTL 8 "Januar 2012" procps\-ng System\-Administration
+.SH BEZEICHNUNG
+sysctl \- die Kernel\-Parameter zur Laufzeit konfigurieren
+.SH ÜBERSICHT
+\fBsysctl\fP [\fIOptionen\fP] [\fIVariable\fP[\fB=\fP\fIWert\fP]] […]
+.br
+\fBsysctl \-p\fP [\fIDatei\fP oder \fIregulärer Ausdruck\fP] […]
+.SH BESCHREIBUNG
+\fBsysctl\fP wird zur Beeinflussung der Kernelparameter zur Laufzeit
+verwendet. Die verfügbaren Parameter sind unter /proc/sys/ aufgelistet.
+Procfs wird für die \fBsysctl\fP\-Unterstützung in Linux benötigt. Sie können
+\fBsysctl\fP sowohl zum Lesen als auch zum Schreiben von sysctl\-Daten
+verwenden.
+.SH PARAMETER
+.TP 
+\fIVariable\fP
+ist der Name des Schlüssels, der ausgelesen werden soll, zum Beispiel
+kernel.ostype. Als Trenner wird neben dem Punkt ».« auch der Schrägstrich
+»/« akzeptiert.
+.TP 
+\fIVariable\fP=\fIWert\fP
+Um einen Schlüssel zu setzen, verwenden Sie die Form \fIVariable\fP=\fIWert\fP,
+wobei \fIVariable\fP den Schlüssel darstellt und \fIWert\fP derjenige ist, auf den
+der Schlüssel gesetzt werden soll. Falls der Wert Zitatzeichen oder Zeichen
+enthält, die von der Shell interpretiert werden, müssen Sie den Wert in
+doppelte Anführungszeichen einschließen. Dafür wird der Parameter \fB\-w\fP
+benötigt.
+.TP 
+\fB\-n\fP, \fB\-\-values\fP
+unterdrückt die Ausgabe des Schlüsselnamens, wenn Werte ausgegeben werden.
+.TP 
+\fB\-e\fP, \fB\-\-ignore\fP
+unterdrückt die Ausgabe von Fehlermeldungen bei unbekannten Schlüsseln.
+.TP 
+\fB\-N\fP, \fB\-\-names\fP
+gibt nur die Namen aus. Dies kann bei Shells mit programmierbarer
+Vervollständigung sinnvoll sein.
+.TP 
+\fB\-q\fP, \fB\-\-quiet\fP
+unterdrückt die Ausgabe der gesetzten Werte in die Standardausgabe.
+.TP 
+\fB\-w\fP, \fB\-\-write\fP
+wird zum Ändern einer sysctl\-Einstellung verwendet.
+.TP 
+\fB\-p\fP[\fIDATEI\fP], \fB\-\-load\fP[=\fIDATEI\fP]
+lädt die sysctl\-Einstellungen aus der angegebenen Datei oder
+/etc/sysctl.conf, falls keine angegeben ist. Bei Angabe von »\-« als
+Dateiname wird aus der Standardeingabe gelesen. Die in dieser Option an
+\fBsysctl\fP übergebenen Argumente werden als Dateien aufgefasst und in der
+angegebenen Reihenfolge gelesen. Das Dateiargument kann als regulärer
+Ausdruck angegeben werden.
+.TP 
+\fB\-a\fP, \fB\-\-all\fP
+zeigt alle aktuell verfügbaren Werte an.
+.TP 
+\fB\-\-deprecated\fP
+schließt veraltete Parameter in die Auflistung der Werte mit \fB\-\-all\fP ein.
+.TP 
+\fB\-b\fP, \fB\-\-binary\fP
+gibt den Wert ohne neue Zeile aus.
+.TP 
+\fB\-\-system\fP
+lädt die Einstellungen aus allen Konfigurationsdateien des Systems.
+.br
+/run/sysctl.d/*.conf
+.br
+/etc/sysctl.d/*.conf
+.br
+/usr/local/lib/sysctl.d/*.conf
+.br
+/usr/lib/sysctl.d/*.conf
+.br
+/lib/sysctl.d/*.conf
+.br
+/etc/sysctl.conf
+.TP 
+\fB\-r\fP, \fB\-\-pattern\fP \fIMuster\fP
+wendet nur Einstellungen an, die dem \fIMuster\fP entsprechen. Das \fIMuster\fP
+verwendet eine erweiterte Syntax mit regulären Ausdrücken.
+.TP 
+\fB\-A\fP
+Alias für \fB\-a\fP
+.TP 
+\fB\-d\fP
+Alias für \fB\-h\fP
+.TP 
+\fB\-f\fP
+Alias für \fB\-p\fP
+.TP 
+\fB\-X\fP
+Alias für \fB\-a\fP
+.TP 
+\fB\-o\fP
+ist wirkungslos, nur für BSD\-Kompatibilität.
+.TP 
+\fB\-x\fP
+ist wirkungslos, nur für BSD\-Kompatibilität.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+zeigt eine Hilfe an und beendet das Programm.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an und beendet das Programm.
+.SH BEISPIELE
+/sbin/sysctl \-a
+.br
+/sbin/sysctl \-n kernel.hostname
+.br
+/sbin/sysctl \-w kernel.domainname="beispiel.com"
+.br
+/sbin/sysctl \-p/etc/sysctl.conf
+.br
+/sbin/sysctl \-a \-\-pattern forward
+.br
+/sbin/sysctl \-a \-\-pattern forward$
+.br
+/sbin/sysctl \-a \-\-pattern 'net.ipv4.conf.(eth|wlan)0.arp'
+.br
+/sbin/sysctl \-\-system \-\-pattern '^net.ipv6'
+.SH "VERALTETE PARAMETER"
+Die Parameter \fBbase_reachable_time\fP und \fBretrans_time\fP sind veraltet. Der
+sysctl\-Befehl erlaubt die Änderung der Werte dieser Parameter
+nicht. Benutzer, die immer noch veraltete Kernelschnittstellen benutzen,
+sollten Werte im /proc\-Dateisystem auf andere Weise behandeln, zum Beispiel:
+.PP
+echo 256 > /proc/sys/net/ipv6/neigh/eth0/base_reachable_time
+.SH DATEIEN
+\fI/proc/sys\fP
+.br
+\fI/etc/sysctl.conf\fP
+.SH "SIEHE AUCH"
+\fBsysctl.conf\fP(5)  \fBregex\fP(7)
+.SH AUTOR
+.UR staikos@0wned.org
+George Staikos
+.UE
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

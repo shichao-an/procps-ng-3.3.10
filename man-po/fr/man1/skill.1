@@ -1,0 +1,111 @@
+.\" t
+.\" (The preceding line is a note to broken versions of man to tell
+.\" them to pre-process this man page with tbl)
+.\" Man page for skill and snice.
+.\" Licensed under version 2 of the GNU General Public License.
+.\" Written by Albert Cahalan, converted to a man page by
+.\" Michael K. Johnson
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SKILL 1 "octobre 2011" procps\-ng "Commandes de l'utilisateur"
+.SH NOM
+skill, snice \- Envoyer un signal ou rendre compte de l'état d'un processus
+.SH SYNOPSIS
+\fBskill\fP [\fIsignal\fP] [\fIoptions\fP] \fIexpression\fP
+.br
+\fBsnice\fP [\fInouvelle priorité\fP] [\fIoptions\fP] \fIexpression\fP
+.SH DESCRIPTION
+Ces outils sont obsolètes et non portables. La syntaxe de la commande n'est
+pas optimale. Veuillez utiliser les commandes \fBkillall\fP, \fBpkill\fP et
+\fBpgrep\fP à la place.
+.PP
+Le \fIsignal\fP par défaut pour \fBskill\fP est \fBTERM\fP. Utilisez \fB\-l\fP ou \fB\-L\fP
+pour obtenir la liste des signaux disponibles. Parmi les plus utiles, on
+trouve \fBHUP\fP, \fBINT\fP, \fBKILL\fP, \fBSTOP\fP, \fBCONT\fP et \fB0\fP. Certains signaux
+peuvent être désignés de trois manières différentes\ : \-9 \-SIGKILL \-KILL.
+.PP
+La priorité par défaut pour snice est +4. Les indices de priorité vont de
++20 (le plus lent) à \-20 (le plus rapide). Les indices de priorité négatifs
+sont réservés aux administrateurs.
+.SH OPTIONS
+.TP 
+\fB\-f\fP,\fB\ \-\-fast\fP
+Mode rapide. Cette option n'a pas été implémentée.
+.TP 
+\fB\-i\fP,\fB\ \-\-interactive\fP
+Mode interactif. Chaque action devra être validée.
+.TP 
+\fB\-l\fP,\fB\ \-\-list\fP
+Afficher tous les noms de signaux.
+.TP 
+\fB\-L\fP, \fB\-\-table\fP
+Afficher tous les noms de signaux en tableau bien présenté.
+.TP 
+\fB\-n\fP,\fB\ \-\-no\-action\fP
+Pas d'action. Réaliser une simulation des événements qui auraient lieu mais
+sans vraiment modifier le système.
+.TP 
+\fB\-v\fP,\fB\ \-\-verbose\fP
+Bavard. Expliquer ce qui est en train de se faire.
+.TP 
+\fB\-w\fP,\fB\ \-\-warnings\fP
+Alertes activées. Cette option n'a pas été implémentée.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+Afficher l'aide et quitter.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+Afficher les informations de version.
+.PD
+.SH "OPTIONS DE SÉLECTION DES PROCESSUS"
+Les critères de sélection peuvent être\ : terminal, nom d'utilisateur,
+identifiant de processus, commande. Les options ci\-dessous peuvent être
+utilisées pour s'assurer d'une interprétation correcte.
+.TP 
+\fB\-t\fP, \fB\-\-tty\fP \fItty\fP
+\fItty\fP est un terminal (tty ou pty).
+.TP 
+\fB\-u\fP, \fB\-\-user\fP \fIutilisateur\fP
+\fIutilisateur\fP est un nom d'utilisateur.
+.TP 
+\fB\-p\fP, \fB\-\-pid\fP \fIPID\fP
+\fIPID\fP est un numéro d'identifiant de processus.
+.TP 
+\fB\-c\fP, \fB\-\-command\fP \fIcommande\fP
+\fIcommande\fP est un nom de commande.
+.TP 
+\fB\-\-ns\fP \fIPID\fP
+Sélectionner les processus qui appartiennent aux mêmes espaces de nommage
+que \fIPID\fP.
+.TP 
+\fB\-\-nslist\fP \fIen\fP[\fB,\fP\fIen\fP]...
+Afficher les espaces de nommage qui seront considérés pour l’option
+\fB\-\-ns\fP. Les espaces de nommage disponibles sont\ : ipc, mnt, net, pid, user
+et uts.
+.PD
+.SH SIGNAUX
+Le comportement du signal est expliqué dans la page de manuel \fBsignal\fP(7).
+.SH EXEMPLES
+.TP 
+\fBsnice \-c seti \-c crack +7\fP
+Ralentir les commandes seti et crack.
+.TP 
+\fBskill \-KILL \-t /dev/pts/*\fP
+Tuer les utilisateurs sur les périphériques PTY.
+.TP 
+\fBskill \-STOP \-u viro \-u lm \-u davem\fP
+Suspendre les trois utilisateurs en question.
+.SH "VOIR AUSSI"
+\fBkill\fP(1), \fBkill\fP(2), \fBkillall\fP(1), \fBnice\fP(1), \fBpkill\fP(1),
+\fBrenice\fP(1), \fBsignal\fP(7)
+.SH NORMES
+Aucune norme ne s'applique.
+.SH AUTEUR
+Albert Cahalan <\fIalbert@users.sf.net\fP> a écrit skill et snice en
+1999 en remplacement d'une version non libre.
+.SH BOGUES
+Signalez les bogues à <\fIprocps@freelists.org\fP>

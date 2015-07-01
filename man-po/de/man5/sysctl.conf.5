@@ -1,0 +1,73 @@
+.\" Copyright 1999, George Staikos (staikos@0wned.org)
+.\" This file may be used subject to the terms and conditions of the
+.\" GNU General Public License Version 2, or any later version
+.\" at your option, as published by the Free Software Foundation.
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+.\" GNU General Public License for more details."
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SYSCTL.CONF 5 "Januar 2012" procps\-ng Dateiformate
+.SH BEZEICHNUNG
+sysctl.conf \- Konfigurationsdatei für sysctl zum Laden und Speichern
+.SH BESCHREIBUNG
+Die Datei \fBsysctl.conf\fP enthält Werte, die von \fBsysctl\fP gelesen und
+geschrieben werden. Folgende einfache Syntax wird verwendet:
+.RS
+.sp
+.nf
+.ne 7
+# Kommentar
+; Kommentar
+
+Token = Wert
+.fi
+.RE
+.PP
+Beachten Sie, dass Leerzeilen und Leerzeichen vor und nach einem Token oder
+Wert ignoriert werden, obwohl ein Wert dagegen durchaus Leerzeichen
+enthalten darf. Zeilen, die mit einem # oder ; beginnen, werden als
+Kommentare aufgefasst und ignoriert.
+.SH BEISPIEL
+.RS
+.sp
+.nf
+.ne 7
+# Beispiel für sysctl.conf
+#
+  kernel.domainname = beispiel.com
+; hier ist ein Leerzeichen, das von sysctl verarbeitet wird!
+  kernel.modprobe = /sbin/mod probe
+.fi
+.RE
+.PP
+.SH DATEIEN
+.TP 
+/run/sysctl.d/*.conf
+.TQ
+/etc/sysctl.d/*.conf
+.TQ
+/usr/local/lib/sysctl.d/*.conf
+.TQ
+/usr/lib/sysctl.d/*.conf
+.TQ
+/lib/sysctl.d/*.conf
+.TQ
+/etc/sysctl.conf
+sind die Pfade, in denen die Dateien üblicherweise zu finden sind, aus denen
+sysctl liest. Weitere Informationen finden Sie in der Option \fI\-\-system\fP von
+sysctl.
+.SH "SIEHE AUCH"
+\fBsysctl\fP(8)
+.SH AUTOR
+.UR staikos@0wned.org
+George Staikos
+.UE
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

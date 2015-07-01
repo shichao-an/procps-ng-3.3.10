@@ -1,0 +1,201 @@
+.\" Manual page for pgrep / pkill.
+.\" Licensed under version 2 of the GNU General Public License.
+.\" Copyright 2000 Kjetil Torgrim Homme
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH PGREP 1 "Oktober 2012" procps\-ng "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+pgrep, pkill \- findet Prozesse oder sendet ein Signal auf Basis des Namens
+oder anderer Attribute
+.SH ÜBERSICHT
+\fBpgrep\fP [Optionen] Muster
+.br
+\fBpkill\fP [Optionen] Muster
+.SH BESCHREIBUNG
+\fBpgrep\fP durchsucht die gegenwärtig laufenden Prozesse und listet die
+Prozesskennungen (IDs), welche den Auswahlkriterien entsprechen, in der
+Standardausgabe auf. Übereinstimmungen sind für alle Auswahlkriterien
+erforderlich. Beispielsweise listet
+.IP
+$ pgrep \-u root sshd
+.PP
+nur die Prozesse auf, deren Name \fBsshd\fP lautet UND \fBroot\fP
+gehören. Andererseits listet
+.IP
+$ pgrep \-u root,daemon
+.PP
+jene Prozesse auf, die entweder \fBroot\fP ODER \fBdaemon\fP gehören.
+.PP
+\fBpkill\fP sendet das angegebene Signal (per Vorgabe \fBSIGTERM\fP) an jeden
+Prozess, anstatt diese in der Standardausgabe aufzulisten.
+.SH OPTIONEN
+.TP 
+\fB\-\fP\fISignal\fP
+.TQ
+\fB\-\-signal\fP \fISignal\fP
+definiert das Signal, das an jeden passenden Prozess gesendet werden
+soll. Es werden entweder numerische Angaben oder der symbolische Signalname
+akzeptiert (nur für \fBpkill\fP).
+.TP 
+\fB\-c\fP, \fB\-\-count\fP
+unterdrückt normale Ausgaben und gibt stattdessen die Anzahl der passenden
+Prozesse aus. Wenn keine Übereinstimmungen gefunden werden, liefert der
+Befehl einen von 0 verschiedenen Rückgabewert.
+.TP 
+\fB\-d\fP, \fB\-\-delimiter\fP \fIdelimiter\fP
+legt die in der Ausgabe als Trenner für die Prozesskennungen zu verwendende
+Zeichenkette fest. Vorgabe ist ein Zeilenumbruch (gilt nur für \fBpgrep\fP).
+.TP 
+\fB\-f\fP, \fB\-\-full\fP
+Das \fIMuster\fP wird normalerweise nur auf den Prozessnamen angewendet. Wenn
+\fB\-f\fP gesetzt ist, wird die vollständige Befehlszeile verwendet.
+.TP 
+\fB\-g\fP, \fB\-\-pgroup\fP \fIpgrp\fP, …
+sucht nur nach passenden Prozessen, die in den Prozessgruppen\-IDs
+aufgelistet sind. Die Prozessgruppe 0 wird in die eigene Prozessgruppe von
+\fBpgrep\fP oder \fBpkill\fP übersetzt.
+.TP 
+\fB\-G\fP, \fB\-\-group\fP \fIGruppen\-ID\fP, …
+berücksichtigt nur Prozesse, deren reale Gruppen\-ID aufgelistet ist. Hier
+kann entweder der numerische oder der symbolische Wert verwendet werden.
+.TP 
+\fB\-l\fP, \fB\-\-list\-name\fP
+listet sowohl den Prozessnamen als auch die Prozess\-ID auf (nur für
+\fBpgrep\fP).
+.TP 
+\fB\-a\fP, \fB\-\-list\-full\fP
+listet sowohl die vollständige Befehlszeile als auch die Prozess\-ID auf (nur
+für \fBpgrep\fP).
+.TP 
+\fB\-n\fP, \fB\-\-newest\fP
+wählt nur den neuesten (zuletzt gestarteten) aus den passenden Prozessen
+aus.
+.TP 
+\fB\-o\fP, \fB\-\-oldest\fP
+wählt nur den ältesten (zuerst gestarteten) aus den passenden Prozessen aus.
+.TP 
+\fB\-P\fP, \fB\-\-parent\fP \fIppid\fP, …
+sucht nur nach Prozessen, von denen die ID des übergeordneten Prozesses
+aufgelistet ist.
+.TP 
+\fB\-s\fP, \fB\-\-session\fP \fISitzungs\-ID\fP, …
+sucht nur nach passenden Prozessen, die in den Prozess\-Sitzungs\-ID
+aufgelistet ist. Die Sitzungs\-ID 0 wird in die eigene Prozessgruppe von
+\fBpgrep\fP oder \fBpkill\fP übersetzt.
+.TP 
+\fB\-t\fP, \fB\-\-terminal\fP \fITerminal\fP, …
+sucht nur nach passenden Prozessen, deren steuerndes Terminal aufgelistet
+ist. Der Terminalname sollte ohne das Präfix »dev« angegeben werden.
+.TP 
+\fB\-u\fP, \fB\-\-euid\fP \fIeuid\fP, …
+sucht nur nach passenden Prozessen, deren effektive Benutzer\-ID aufgelistet
+ist. Sie können entweder numerische oder symbolische Werte verwenden.
+.TP 
+\fB\-U\fP, \fB\-\-uid\fP \fIBenutzer\-ID\fP, …
+sucht nur nach passenden Prozessen, deren reale Benutzer\-ID aufgelistet
+ist. Sie können entweder numerische oder symbolische Werte verwenden.
+.TP 
+\fB\-v\fP, \fB\-\-inverse\fP
+negiert die Anwendung der Suchkriterien. Diese Option wird üblicherweise mit
+\fBpgrep\fP verwendet. In \fBpkill\fP ist die Kurzoption deaktiviert, um die
+zufällige Anwendung dieser Option zu vermeiden.
+.TP 
+\fB\-w\fP, \fB\-\-lightweight\fP
+zeigt alle Thread\-IDs anstelle der Prozess\-IDs im Kontext von \fBpgrep\fP
+an. In \fBpkill\fP ist diese Option deaktiviert.
+.TP 
+\fB\-x\fP, \fB\-\-exact\fP
+sucht nur nach Prozessen, deren Namen (oder Befehlszeilen, falls \-f
+angegeben ist) \fBexakt\fP dem \fIMuster\fP entsprechen.
+.TP 
+\fB\-F\fP, \fB\-\-pidfile\fP \fIDatei\fP
+liest die \fIPID\fPs aus einer Datei. Diese Option ist eher für \fBpkill\fP als
+für \fBpgrep\fP sinnvoll.
+.TP 
+\fB\-L\fP, \fB\-\-logpidfile\fP
+Fehlschlag, wenn die PID\-Datei nicht gesperrt ist.
+.TP 
+\fB\-\-ns \fP\fIPID\fP
+sucht nach Prozessen, die zu den gleichen Namensräumen gehören. Um Prozesse
+anderer Benutzer zu finden, sind Root\-Rechte erforderlich. In \-\-nslist
+finden Sie Informationen, wie Sie die Übereinstimmungen im Zusammenhang mit
+Namensräumen begrenzen können.
+.TP 
+\fB\-\-nslist \fP\fIName\fP\fB, …\fP
+sucht nur in den angegebenen Namensräumen nach Übereinstimmungen. Verfügbare
+Namensräume: ipc, mnt, net, pid, user, uts.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an und beendet das Programm.
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+zeigt eine Hilfe an und beendet das Programm.
+.PD
+.SH OPERANDEN
+.TP 
+\fIMuster\fP
+gibt einen erweiterten regulären Ausdruck für die Übereinstimmungen von
+Prozessnamen oder Befehlszeilen an.
+.SH BEISPIELE
+Beispiel 1: Prozess\-ID des \fBnamed\fP\-Daemons suchen:
+.IP
+$ pgrep \-u root named
+.PP
+Beispiel 2: \fBsyslog\fP veranlassen, seine Konfigurationsdatei neu einzulesen:
+.IP
+$ pkill \-HUP syslogd
+.PP
+Beispiel 3: Detaillierte Informationen zu allen \fBxterm\fP\-Prozessen ausgeben:
+.IP
+$ ps \-fp $(pgrep \-d, \-x xterm)
+.PP
+Beispiel 4: Den Nice\-Wert für alle \fBnetscape\fP\-Prozesse erhöhen:
+.IP
+$ renice +4 $(pgrep netscape)
+.SH EXIT\-STATUS
+.PD 0
+.TP 
+0
+Ein oder mehrere Prozesse entsprechen den Suchkriterien.
+.TP 
+1
+Keine Prozesse gefunden.
+.TP 
+2
+Syntaxfehler in der Befehlszeile.
+.TP 
+3
+Schwerwiegender Fehler: Speicher ausgeschöpft usw.
+.PD
+.SH ANMERKUNGEN
+Der für die Suche verwendete Prozessname ist auf die 15 Zeichen in der
+Ausgabe von /proc/\fIProzess\-ID\fP/stat beschränkt. Verwenden Sie die Option
+\-f, um stattdessen Übereinstimmungen in der gesamten Befehlszeile zu suchen,
+/proc/\fIProzess\-ID\fP/cmdline.
+.PP
+Die laufenden \fBpgrep\fP\- oder \fBpkill\fP\-Prozesse werden niemals selbst als
+Treffer gemeldet.
+.SH FEHLER
+Die Optionen \fB\-n\fP, \fB\-o\fP und \fB\-v\fP können nicht kombiniert werden. Bitte
+informieren Sie die Entwickler, falls das für Ihre Zwecke nötig sein sollte.
+.PP
+Bereits beendete Prozesse werden gemeldet.
+
+.SH "SIEHE AUCH"
+\fBps\fP(1), \fBregex\fP(7), \fBsignal\fP(7), \fBkillall\fP(1), \fBskill\fP(1), \fBkill\fP(1),
+\fBkill\fP(2)
+.SH STANDARDS
+\fBpkill\fP und \fBpgrep\fP wurden zuerst in Sun Solaris 7 eingeführt. Diese
+Implementation ist vollständig kompatibel.
+.SH AUTOR
+.UR kjetilho@ifi.uio.no
+Kjetil Torgrim Homme
+.UE
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

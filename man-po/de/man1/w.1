@@ -1,0 +1,96 @@
+.\"             -*-Nroff-*-
+.\"
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH W 1 "Mai 2012" procps\-ng "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+w \- zeigt die angemeldeten Benutzer und deren Aktivitäten an
+.SH ÜBERSICHT
+\fBw\fP [\fIOptionen\fP] \fIBenutzer\fP […]
+.SH BESCHREIBUNG
+\fBw\fP zeigt Informationen über die aktuell am Rechner angemeldeten Benutzer
+und deren Prozesse an. Die Kopfzeile zeigt in dieser Reihenfolge die
+aktuelle Zeit, die aktive Zeit des Systems, die Anzahl der aktuell
+angemeldeten Benutzer und die durchschnittliche Auslastung des Systems in
+den letzten 1, 5 und 15 Minuten.
+.PP
+Die folgenden Einträge werden für jeden Benutzer angezeigt: der Anmeldename,
+der Name des Terminals (TTY), der entfernte Rechner, die Anmeldezeit, die
+Zeit der Untätigkeit, JCPU, PCPU und die Befehlszeile der aktuellen Prozesse
+der Benutzer.
+.PP
+Die JCPU\-Zeit ist die Zeit aller Prozesse, die an einem bestimmten Terminal
+hängen. Vergangene Hintergrundprozesse sind hier nicht enthalten, aber doch
+die aktuellen Hintergrundprozesse.
+.PP
+Die PCPU\-Zeit ist die Zeit, die vom aktuellen Prozess verwendet wird,
+benannt im Feld »what«.
+.SH BEFEHLSZEILENOPTIONEN
+.TP 
+\fB\-h\fP, \fB\-\-no\-header\fP
+gibt keine Kopfzeile aus.
+.TP 
+\fB\-u\fP, \fB\-\-no\-current\fP
+ignoriert den Benutzernamen, während die aktuellen Prozess\- und CPU\-Zeiten
+ermittelt werden. Um dies zu demonstrieren, geben Sie »su« und ein »w« ein
+und ein »w \-u«.
+.TP 
+\fB\-s\fP, \fB\-\-short\fP
+verwendet das Kurzformat. Die Anmeldezeit und die Zeiten für JCPU oder PCPU
+werden nicht ausgegeben.
+.TP 
+\fB\-f\fP, \fB\-\-from\fP
+Toggle printing the \fBfrom\fP (remote hostname) field.  The default as
+released is for the \fBfrom\fP field to not be printed, although your system
+administrator or distribution maintainer may have compiled a version in
+which the \fBfrom\fP field is shown by default.
+.TP 
+\fB\-\-help\fP
+zeigt eine Hilfe an und beendet das Programm.
+.TP 
+\fB\-i\fP, \fB\-\-ip\-addr\fP
+zeigt die IP\-Adresse anstelle des Rechnernamens im \fBfrom\fP\-Feld an.
+.TP 
+\fB\-V\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an.
+.TP 
+\fB\-o\fP, \fB\-\-old\-style\fP
+verwendet die Ausgabe im alten Stil. Für untätige Zeiten von weniger als
+einer Minute werden Leerzeichen ausgegeben.
+.TP 
+\fBBenutzer\fP
+zeigt nur Informationen zum angegebenen Benutzer an.
+.SH UMGEBUNG
+.TP 
+PROCPS_USERLEN
+setzt die Vorgabebreite der »Benutzername«\-Spalte außer Kraft. Vorgabe ist
+8.
+.TP 
+PROCPS_FROMLEN
+setzt die Vorgabebreite der »from«\-Spalte außer Kraft. Vorgabe ist 16.
+.SH DATEIEN
+.TP 
+\fI/var/run/utmp\fP
+zeigt Informationen darüber an, wer gerade angemeldet ist.
+.TP 
+\fI/proc\fP
+Prozessinformationen
+.SH "SIEHE AUCH"
+\fBfree\fP(1), \fBps\fP(1), \fBtop\fP(1), \fBuptime\fP(1), \fButmp\fP(5), \fBwho\fP(1)
+.SH AUTOREN
+\fBw\fP wurde von Charles Blake fast völlig neu geschrieben, basierend auf der
+Version von
+.UR greenfie@\:gauss.\:rutgers.\:edu
+Larry Greenfield
+.UE
+und
+.UR johnsonm@\:redhat.\:com
+Michael K. Johnson
+.UE
+.SH "FEHLER BERICHTEN"
+Bitte senden Sie Fehlerberichte an
+.UR procps@freelists.org
+.UE

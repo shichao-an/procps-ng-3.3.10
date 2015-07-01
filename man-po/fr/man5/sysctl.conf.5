@@ -1,0 +1,69 @@
+.\" Copyright 1999, George Staikos (staikos@0wned.org)
+.\" This file may be used subject to the terms and conditions of the
+.\" GNU General Public License Version 2, or any later version
+.\" at your option, as published by the Free Software Foundation.
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+.\" GNU General Public License for more details."
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH SYSCTL.CONF 5 "janvier 2012" procps\-ng "Formats de fichier"
+.SH NOM
+sysctl.conf \- Fichier de configuration et de chargement pour sysctl
+.SH DESCRIPTION
+\fIsysctl.conf\fP est un simple fichier contenant les valeurs qui doivent être
+définies par \fBsysctl\fP. La syntaxe est la suivante\ :
+.RS
+.sp
+.nf
+.ne 7
+# commentaire
+; commentaire
+
+élément = valeur
+.fi
+.RE
+.PP
+Notez que les lignes vides et les espaces avant ou après un élément ou une
+valeur sont ignorées. Une valeur peut, cependant, contenir des espaces. Les
+lignes commençant par un «\ #\ » ou un «\ ;\ » sont des commentaires et sont
+donc ignorées.
+.SH EXEMPLE
+.RS
+.sp
+.nf
+.ne 7
+# Exemple de fichier sysctl.conf
+#
+  kernel.domainname = example.com
+; la ligne suivante contient une espace
+; qui sera passée à la commande sysctl.
+  kernel.modprobe = /sbin/mod probe
+.fi
+.RE
+.PP
+.SH FICHIERS
+.TP 
+\fI/run/sysctl.d/*.conf\fP
+.TQ
+\fI/etc/sysctl.d/*.conf\fP
+.TQ
+\fI/usr/local/lib/sysctl.d/*.conf\fP
+.TQ
+\fI/usr/lib/sysctl.d/*.conf\fP
+.TQ
+\fI/lib/sysctl.d/*.conf\fP
+.TQ
+\fI/etc/sysctl.conf\fP
+Les chemins où les fichiers préchargés de sysctl qui existent
+d’habitude. Consultez aussi l'option \fB\-\-system\fP de \fBsysctl\fP(8).
+.SH "VOIR AUSSI"
+\fBsysctl\fP(8)
+.SH AUTEUR
+George Staikos <\fIstaikos@wnedorg\fP>
+.SH BOGUES
+Signalez les bogues à <\fIprocps@freelists.org\fP>

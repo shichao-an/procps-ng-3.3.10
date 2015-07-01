@@ -1,0 +1,194 @@
+.\"*******************************************************************
+.\"
+.\" This file was generated with po4a. Translate the source file.
+.\"
+.\"*******************************************************************
+.TH WATCH 1 "Juni 2011" procps\-ng "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG
+watch \- führt ein Programm in periodischen Abständen aus und zeigt die
+Ausgabe im Vollbild an
+.SH ÜBERSICHT
+\fBwatch\fP [\fIOptionen\fP] \fIBefehl\fP
+.SH BESCHREIBUNG
+\fBwatch\fP führt einen \fIBefehl\fP in periodischen Abständen aus und zeigt die
+Ausgabe sowie Fehlermeldungen im Vollbild an (der erste
+Bildschirminhalt). Dies ermöglicht Ihnen, die Änderungen eines Programms
+über einen bestimmten Zeitraum zu überwachen. Per Vorgabe wird das Programm
+alle 2 Sekunden ausgeführt, und \fBwatch\fP läuft, bis es abgebrochen wird.
+.SH OPTIONEN
+.TP 
+\fB\-d\fP, \fB\-\-differences\fP [\fIpermanent\fP]
+hebt die Unterschiede zwischen aufeinanderfolgenden Aktualisierungen
+hervor. Optionale Argumente werden gelesen, die dafür sorgen, dass die
+Hervorhebung erhalten bleibt. Dies erlaubt Ihnen zu sehen, was sich
+mindestens seit dem ersten Durchlauf geändert hat.
+.TP 
+\fB\-n\fP, \fB\-\-interval\fP \fISekunden\fP
+gibt das Aktualisierungsintervall an. Der Befehl erlaubt keine
+Aktualisierungen in weniger als 0.1 Sekunden Abstand. Kleinere Werte werden
+entsprechend umgewandelt.
+.TP 
+\fB\-p\fP, \fB\-\-precise\fP
+ermöglicht \fBwatch\fP zu versuchen, den \fIBefehl\fP im angegebenen \fIIntervall\fP
+(in Sekunden) auszuführen. Versuchen Sie dies mit \fBntptime\fP und beachten
+Sie, wie die Sekundenbruchteile (beinahe) gleich bleiben, während sie sich
+im Normalmodus ständig erhöhen.
+.TP 
+\fB\-t\fP, \fB\-\-no\-title\fP
+schaltet die Anzeige der Kopfzeile ab, die das Intervall, den Befehl und die
+aktuelle Zeit im oberen Bereich des Bildschirms anzeigt, sowie die
+nachfolgende Leerzeile.
+.TP 
+\fB\-b\fP, \fB\-\-beep\fP
+spielt einen Warnklang ab, wenn die Ausgabe des Befehls nicht Null ist.
+.TP 
+\fB\-e\fP, \fB\-\-errexit\fP
+friert die Aktualisierungen bei Fehlern in der Befehlsausgabe ein und
+beendet nach Tastendruck.
+.TP 
+\fB\-g\fP, \fB\-\-chgexit\fP
+beendet das Programm, wenn sich die Ausgabe des \fIBefehls\fP ändert.
+.TP 
+\fB\-c\fP, \fB\-\-color\fP
+interpretiert ANSI\-Farb\- und Stilsequenzen.
+.TP 
+\fB\-x\fP, \fB\-\-exec\fP
+Der \fIBefehl\fP wird an \fBsh \-c\fP übergeben, was bedeutet, dass Sie zusätzliche
+Zitatzeichen verwenden müssen, um den gewünschten Effekt zu erzielen. Die
+Option \-\-exec übergibt den Befehl direkt an \fBexec\fP(2).
+.TP 
+\fB\-h\fP, \fB\-\-help\fP
+zeigt eine Hilfe an und beendet das Programm.
+.TP 
+\fB\-v\fP, \fB\-\-version\fP
+zeigt Versionsinformationen an und beendet das Programm.
+.SH ANMERKUNG
+Beachten Sie, dass die Optionen POSIX\-konform verarbeitet werden (d.h. die
+Verarbeitung der Optionen stoppt bei der ersten Nicht\-Option in der
+Befehlszeile). Dies bedeutet, dass Schalter nach dem \fIBefehl\fP von \fBwatch\fP
+selbst nicht interpretiert werden.
+.SH BEISPIELE
+.PP
+Um nach Ihren Mails zu sehen, versuchen Sie
+.IP
+watch \-n 60 from
+.PP
+Um die Änderungen von Verzeichnisinhalten zu überwachen, verwenden Sie
+.IP
+watch \-d ls \-l
+.PP
+Falls Sie nur an Dateien interessiert sind, die dem Benutzer »hans« gehören,
+verwenden Sie
+.IP
+watch \-d 'ls \-l | fgrep hans'
+.PP
+Um die Wirkung von Zitatzeichen zu sehen, versuchen Sie
+.IP
+watch echo $$
+.br
+watch echo '$$'
+.br
+watch echo "'"'$$'"'"
+.PP
+To see the effect of precision time keeping, try adding \fI\-p\fP to
+.IP
+watch \-n 10 sleep 1
+.PP
+Sie können anzeigen lassen, wann der Administrator den neuesten Kernel
+installiert:
+.IP
+watch uname \-r
+.PP
+(Beachten Sie, dass \fI\-p\fP nicht unbedingt nach einem Neustart des Systems
+funktioniert, speziell im Hinblick auf \fBntpdate\fP oder anderen beim
+Systemstart die Zeit anpassenden Mechanismen.)
+.SH FEHLER
+Nach der Größenänderung des Terminals wird der Bildschirm bis zur nächsten
+planmäßigen Aktualisierung nicht korrekt neu gezeichnet. Alle durch
+\fB\-\-differences\fP verursachten Hervorhebungen gehen bei einer Aktualisierung
+ebenfalls verloren.
+.PP
+Nicht darstellbare Zeichen werden aus der Programmausgabe
+entfernt. Verwenden Sie »cat \-v« als Teil der Befehlsweiterleitung, falls
+Sie diese sehen wollen.
+.PP
+Kombinationszeichen, die in der letzten Spalte angezeigt werden sollen,
+können eine Spalte eher angezeigt werden, oder überhaupt nicht.
+.PP
+Kombinationszeichen werden im \fI\-\-differences\fP\-Modus niemals als
+unterschiedliche Zeichen aufgefasst. Lediglich das Basiszeichen ist von
+Belang.
+.PP
+Leere Zeilen direkt nach einer Zeile, die in der letzten Spalte endet,
+werden nicht angezeigt.
+.PP
+\fI\-\-precise\fP mode doesn't yet have advanced temporal distortion technology
+to compensate for a \fIcommand\fP that takes more than \fIinterval\fP seconds to
+execute.  \fBwatch\fP also can get into a state where it rapid\-fires as many
+executions of \fIcommand\fP as it can to catch up from a previous executions
+running longer than \fIinterval\fP (for example, \fBnetstat\fP taking ages on a
+DNS lookup).
+.SH EXIT\-STATUS
+.PP
+.RS
+.PD 0
+.TP 
+\fB0\fP
+Erfolg.
+.TP 
+\fB1\fP
+Verschiedene Fehler.
+.TP 
+\fB2\fP
+Forken des zu überwachenden Prozesses ist fehlgeschlagen.
+.TP 
+\fB3\fP
+Replacing child process stdout with write side pipe failed.
+.TP 
+\fB4\fP
+Ausführung des Befehls ist fehlgeschlagen.
+.TP 
+\fB5\fP
+Closing child process write pipe failed.
+.TP 
+\fB7\fP
+Erstellung der IPC\-Pipe ist fehlgeschlagen.
+.TP 
+\fB8\fP
+Das Ermitteln des Rückgabewertes des Kindprozesses mit \fBwaitpid\fP(2) ist
+fehlgeschlagen oder der Befehl wurde mit einem Fehler beendet.
+.TP 
+\fBandere\fP
+Die Überwachung propagiert den Exit\-Status des Befehls als Exit\-Status des
+Kindprozesses.
+.SH AUTOREN
+Das originale \fBwatch\fP wurde von
+.UR rembo@\:unisoft.\:com
+Tony Rems
+.UE
+im Jahre 1991 geschrieben, mit Modifizierungen und Korrekturen von
+Francois Pinard. Es wurde im Jahre 1999 von
+.UR mkc@\:acm.\:org
+Mike
+Coleman
+.UE
+überarbeitet, wobei auch neue Funktionen hinzugefügt
+wurden. Die beep\- und exec\-Funktionen sowie jene zur Fehlerbehandlung wurden
+von
+.UR morty@\:frakir.\:org
+Morty Abzug
+.UE
+im Jahre 2008
+hinzugefügt. An einem nicht gar so dunklen und stürmischen Morgen im Jahre
+2003 war
+.UR asd@\:suespammers.\:org
+Anthony DeRobertis
+.UE
+ganz krank
+von seinen Überwachungen, die nur in Minutenabständen aktualisierten, und
+baute die Mikrosekunden\-Präzision ein. Unterstützung für Unicode wurde 2009
+von
+.UR procps@\:rrod.\:net
+Jarrod Lowe
+.UE
+hinzugefügt.
